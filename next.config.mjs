@@ -1,6 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactCompiler: false
-};
+const nextConfig = {};
 
 export default nextConfig;
