@@ -1,66 +1,38 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="min-h-screen bg-black text-white px-6 flex flex-col">
+
+      <section className="flex-1 flex items-center justify-center pt-10">
+        <div className="border-2 border-[#D4AF37] p-12 rounded-xl text-center animate-fadeInBox shadow-gold relative backdrop-blur-sm">
+          <h1 className="text-6xl font-serif mb-6 pb-4 border-b-2 border-[#D4AF37] animate-fadeInUp delay-100">
+            Beads & Pieces
+          </h1>
+          <p className="text-gray-300 text-xl animate-fadeInUp delay-300">
+            Explore handcrafted jewellery.
           </p>
+          <div className="absolute inset-0 pointer-events-none shimmer-mask"></div>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+
+      <div className="flex justify-center mb-2">
+        <div className="w-32 h-[2px] bg-[#D4AF37] animate-fadeInUp"></div>
+      </div>
+
+      <section className="max-w-3xl mx-auto text-center px-4 pb-6 mb-10 animate-fadeInUp delay-200">
+        <h2 className="text-3xl font-serif mb-2 text-[#D4AF37]">
+          About Me
+        </h2>
+
+        <p className="text-gray-300 text-lg leading-relaxed">
+          Hi I'm Mel, I'm a passionate jewellery maker who creates
+          each piece by hand with care, intention, and a love for detail.
+          My work blends simplicity with elegance, offering meaningful pieces
+          designed to be worn every day.
+        </p>
+      </section>
+
+    </main>
   );
 }

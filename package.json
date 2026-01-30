@@ -1,21 +1,16 @@
 {
   "name": "beads-and-pieces",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "start": "next start"
   },
   "dependencies": {
-    "next": "16.1.2",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
-  },
-  "devDependencies": {
-    "babel-plugin-react-compiler": "1.0.0",
-    "eslint": "^9",
-    "eslint-config-next": "16.1.2"
+    "next": "^15.5.10",
+    "react": "latest",
+    "react-dom": "latest",
+    "stripe": "^20.3.0"
   }
 }
