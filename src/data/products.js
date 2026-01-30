@@ -1,4 +1,4 @@
-export const products = [
+const products = [
   {
     id: 1,
     name: "Gold Beaded Bracelet",
@@ -27,30 +27,32 @@ export const products = [
     stock: 1
   },
   {
-  id: 4,
-  name: "Rose Quartz Bracelet",
-  price: 24.99,
-  image: "/products/placeholder.jpg",
-  category: "bracelets",
-  new: false,
-  stock: 1
-},
-{
-  id: 5,
-  name: "Silver Hoop Earrings",
-  price: 19.99,
-  image: "/products/placeholder.jpg",
-  category: "earrings",
-  new: false,
-  stock: 1
-},
-{
-  id: 6,
-  name: "Gold Layered Necklace",
-  price: 44.99,
-  image: "/products/placeholder.jpg",
-  category: "necklaces",
-  new: true,
-  stock: 1
-},
+    id: 4,
+    name: "Rose Quartz Bracelet",
+    price: 24.99,
+    image: "/products/placeholder.jpg",
+    category: "bracelets",
+    new: false,
+    stock: 1
+  },
+  {
+    id: 5,
+    name: "Silver Hoop Earrings",
+    price: 19.99,
+    image: "/products/placeholder.jpg",
+    category: "earrings",
+    new: false,
+    stock: 1
+  },
+  {
+    id: 6,
+    name: "Gold Layered Necklace",
+    price: 44.99,
+    image: "/products/placeholder.jpg",
+    category: "necklaces",
+    new: true,
+    stock: 1
+  }
 ];
+
+export default products;
