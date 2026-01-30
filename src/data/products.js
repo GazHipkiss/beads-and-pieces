@@ -5,7 +5,8 @@ export const products = [
     price: 29.99,
     image: "/products/placeholder.jpg",
     category: "bracelets",
-    new: true
+    new: true,
+    stock: 1
   },
   {
     id: 2,
@@ -13,7 +14,8 @@ export const products = [
     price: 34.99,
     image: "/products/placeholder.jpg",
     category: "earrings",
-    new: true
+    new: true,
+    stock: 1
   },
   {
     id: 3,
@@ -21,7 +23,8 @@ export const products = [
     price: 39.99,
     image: "/products/placeholder.jpg",
     category: "necklaces",
-    new: true
+    new: true,
+    stock: 1
   },
   {
   id: 4,
@@ -29,7 +32,8 @@ export const products = [
   price: 24.99,
   image: "/products/placeholder.jpg",
   category: "bracelets",
-  new: false
+  new: false,
+  stock: 1
 },
 {
   id: 5,
@@ -37,7 +41,8 @@ export const products = [
   price: 19.99,
   image: "/products/placeholder.jpg",
   category: "earrings",
-  new: false
+  new: false,
+  stock: 1
 },
 {
   id: 6,
@@ -45,6 +50,7 @@ export const products = [
   price: 44.99,
   image: "/products/placeholder.jpg",
   category: "necklaces",
-  new: true
+  new: true,
+  stock: 1
 },
 ];

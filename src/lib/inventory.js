@@ -1,4 +1,4 @@
-import products from "@/data/products.json";
+import products from "@/data/products";
 import fs from "fs";
 import path from "path";
 

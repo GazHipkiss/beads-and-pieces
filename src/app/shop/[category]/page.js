@@ -1,4 +1,5 @@
-import { products } from "../../../products";
+import products from "@/data/products";
+
 
 export default function CategoryPage({ params }) {
   const category = params.category.toLowerCase();
