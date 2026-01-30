@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { products } from "../../../data/products";
+import products from "@/data/products";
 import { useCart } from "../../../context/CartContext";
 
 export default function ProductPage() {

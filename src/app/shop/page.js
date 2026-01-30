@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { products as productData } from "../../data/products";
+import products from "@/data/products";
 
 export default function ShopPage() {
   const [sortOption, setSortOption] = useState("default");
@@ -11,8 +11,8 @@ export default function ShopPage() {
   // Filter by category
   const filteredProducts =
     category === "all"
-      ? productData
-      : productData.filter((p) => p.category === category);
+      ? products
+      : products.filter((p) => p.category === category);
 
   // Sorting logic
   const sortedProducts = [...filteredProducts].sort((a, b) => {
@@ -32,9 +32,7 @@ export default function ShopPage() {
 
   return (
     <main className="min-h-screen bg-black text-white px-6 flex flex-col">
-
       <h1 className="text-4xl font-serif text-center mb-12 pb-4">
-
         My Collection
       </h1>
 
@@ -86,7 +84,6 @@ export default function ShopPage() {
             key={product.id}
             className="border border-[#D4AF37] rounded-xl p-4 hover:scale-105 transition-transform duration-300"
           >
-            {/* Image container */}
             <div className="w-full h-56 bg-black rounded overflow-hidden flex items-center justify-center">
               <img
                 src={product.image}
@@ -95,10 +92,8 @@ export default function ShopPage() {
               />
             </div>
 
-            {/* Product name */}
             <h2 className="mt-4 text-xl font-serif">{product.name}</h2>
 
-            {/* Price */}
             <p className="text-[#D4AF37] font-semibold mt-2">
               £{product.price.toFixed(2)}
             </p>
