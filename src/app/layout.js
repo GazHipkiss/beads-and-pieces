@@ -61,12 +61,12 @@ export default function RootLayout({ children }) {
               <p className="text-gray-400 text-xs mt-2">
                 Website designed by{" "}
                 <a
-                  href="https://purekissltd.com"
+                  href="https://hipkissdigital.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#D4AF37] hover:text-white transition-colors"
                 >
-                  Pure Kiss Ltd
+                  Hipkiss Digital
                 </a>
               </p>
 
