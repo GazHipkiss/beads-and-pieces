@@ -1,13 +1,18 @@
-import { supabaseAdmin } from "@/lib/supabase/server";
+import { getSupabaseAdmin } from "@/lib/supabase/server";
 
 export async function POST(req, { params }) {
   try {
-    const productId = params.id;
+    const { id: productId } = await params;
     const formData = await req.formData();
     const file = formData.get("file");
 
     if (!file) {
       return new Response("No file provided", { status: 400 });
+    }
+
+    const supabase = getSupabaseAdmin();
+    if (!supabase) {
+      return new Response("Supabase not configured", { status: 500 });
     }
 
     const bytes = await file.arrayBuffer();
@@ -17,7 +22,7 @@ export async function POST(req, { params }) {
     const fileName = `${productId}-${Date.now()}.${fileExt}`;
     const filePath = `products/${fileName}`;
 
-    const { error: uploadError } = await supabaseAdmin.storage
+    const { error: uploadError } = await supabase.storage
       .from("products")
       .upload(filePath, buffer, {
         contentType: file.type,
@@ -29,7 +34,7 @@ export async function POST(req, { params }) {
       return new Response("Upload failed", { status: 500 });
     }
 
-    const { data: urlData } = supabaseAdmin.storage
+    const { data: urlData } = supabase.storage
       .from("products")
       .getPublicUrl(filePath);
 

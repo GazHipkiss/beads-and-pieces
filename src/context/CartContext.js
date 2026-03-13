@@ -9,7 +9,6 @@ export function CartProvider({ children }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [toast, setToast] = useState(null);
 
-  // Load cart from localStorage on mount
   useEffect(() => {
     const stored = typeof window !== "undefined"
       ? window.localStorage.getItem("cart")
@@ -19,7 +18,6 @@ export function CartProvider({ children }) {
     }
   }, []);
 
-  // Save cart to localStorage whenever it changes
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.localStorage.setItem("cart", JSON.stringify(cart));
@@ -68,6 +66,10 @@ export function CartProvider({ children }) {
     showToast("Removed from cart");
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   const subtotal = cart.reduce(
     (total, item) => total + item.price * item.quantity,
     0
@@ -80,6 +82,7 @@ export function CartProvider({ children }) {
         addToCart,
         updateQuantity,
         removeFromCart,
+        clearCart,
         subtotal,
         isDrawerOpen,
         openDrawer,

@@ -32,10 +32,9 @@ export default function CartPage() {
           {cart.map((item) => (
             <div
               key={item.id}
-              className="flex items-center gap-6 border border-[#D4AF37] rounded-xl p-4"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 border border-[#D4AF37] rounded-xl p-4"
             >
-              {/* Product Image */}
-              <div className="w-28 h-28 bg-black rounded overflow-hidden flex items-center justify-center">
+              <div className="w-20 h-20 sm:w-28 sm:h-28 bg-black rounded overflow-hidden flex items-center justify-center shrink-0">
                 <img
                   src={item.image}
                   alt={item.name}
@@ -43,9 +42,8 @@ export default function CartPage() {
                 />
               </div>
 
-              {/* Product Info */}
               <div className="flex-1">
-                <h2 className="text-xl font-serif">{item.name}</h2>
+                <h2 className="text-lg sm:text-xl font-serif">{item.name}</h2>
                 <p className="text-[#D4AF37] font-semibold mt-1">
                   £{item.price.toFixed(2)}
                 </p>

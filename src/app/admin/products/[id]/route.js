@@ -1,11 +1,16 @@
-import { supabaseAdmin } from "@/lib/supabase/server";
+import { getSupabaseAdmin } from "@/lib/supabase/server";
 
 export async function PUT(req, { params }) {
   try {
-    const productId = params.id;
+    const { id: productId } = await params;
     const body = await req.json();
 
-    const { error } = await supabaseAdmin
+    const supabase = getSupabaseAdmin();
+    if (!supabase) {
+      return new Response("Supabase not configured", { status: 500 });
+    }
+
+    const { error } = await supabase
       .from("products")
       .update({
         name: body.name,
@@ -31,9 +36,14 @@ export async function PUT(req, { params }) {
 
 export async function DELETE(req, { params }) {
   try {
-    const productId = params.id;
+    const { id: productId } = await params;
 
-    const { error } = await supabaseAdmin
+    const supabase = getSupabaseAdmin();
+    if (!supabase) {
+      return new Response("Supabase not configured", { status: 500 });
+    }
+
+    const { error } = await supabase
       .from("products")
       .delete()
       .eq("id", productId);

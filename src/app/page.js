@@ -5,8 +5,8 @@ export default function HomePage() {
     <main className="min-h-screen bg-black text-white px-6 flex flex-col">
 
       <section className="flex-1 flex items-center justify-center pt-10">
-        <div className="border-2 border-[#D4AF37] p-12 rounded-xl text-center animate-fadeInBox shadow-gold relative backdrop-blur-sm">
-          <h1 className="text-6xl font-serif mb-6 pb-4 border-b-2 border-[#D4AF37] animate-fadeInUp delay-100">
+        <div className="border-2 border-[#D4AF37] p-6 sm:p-12 rounded-xl text-center animate-fadeInBox shadow-gold relative backdrop-blur-sm">
+          <h1 className="text-4xl sm:text-6xl font-serif mb-6 pb-4 border-b-2 border-[#D4AF37] animate-fadeInUp delay-100">
             Beads & Pieces
           </h1>
           <p className="text-gray-300 text-xl animate-fadeInUp delay-300">

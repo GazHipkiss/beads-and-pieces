@@ -129,9 +129,13 @@ export default function CartDrawerMinimal() {
                   View Cart
                 </Link>
 
-                <button className="w-full bg-[#D4AF37] text-black py-2 rounded hover:bg-white transition">
+                <Link
+                  href="/checkout"
+                  onClick={closeDrawer}
+                  className="w-full text-center bg-[#D4AF37] text-black py-2 rounded hover:bg-white transition block"
+                >
                   Checkout
-                </button>
+                </Link>
               </div>
             </div>
           </>

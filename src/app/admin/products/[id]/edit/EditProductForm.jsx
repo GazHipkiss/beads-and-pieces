@@ -27,7 +27,7 @@ export default function EditProductForm({ product }) {
   async function handleSave() {
     setSaving(true);
 
-    const res = await fetch(`/api/admin/products/${productId}`, {
+    const res = await fetch(`/admin/products/${productId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -56,7 +56,7 @@ export default function EditProductForm({ product }) {
 
     setDeleting(true);
 
-    const res = await fetch(`/api/admin/products/${productId}`, {
+    const res = await fetch(`/admin/products/${productId}`, {
       method: "DELETE",
     });
 
@@ -80,7 +80,7 @@ export default function EditProductForm({ product }) {
     const formData = new FormData();
     formData.append("file", file);
 
-    const res = await fetch(`/api/admin/products/${productId}/image`, {
+    const res = await fetch(`/admin/products/${productId}/image`, {
       method: "POST",
       body: formData,
     });

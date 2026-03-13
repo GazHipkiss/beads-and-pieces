@@ -1,10 +1,24 @@
-import { supabaseAdmin } from "@/lib/supabase/server";
+import { getSupabaseAdmin } from "@/lib/supabase/server";
 import EditProductForm from "./EditProductForm";
+
+export const dynamic = "force-dynamic";
 
 export default async function EditProductPage({ params }) {
   const productId = params.id;
 
-  const { data: product, error } = await supabaseAdmin
+  const supabase = getSupabaseAdmin();
+  if (!supabase) {
+    return (
+      <div className="max-w-2xl mx-auto py-10">
+        <h1 className="text-2xl font-semibold mb-4">Supabase not configured</h1>
+        <p className="text-sm text-gray-500">
+          Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in .env.local
+        </p>
+      </div>
+    );
+  }
+
+  const { data: product, error } = await supabase
     .from("products")
     .select("*")
     .eq("id", productId)

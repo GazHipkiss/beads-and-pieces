@@ -8,6 +8,7 @@ import CartLink from "../components/CartLink";
 
 export const metadata = {
   title: "Beads & Pieces",
+  description: "Handcrafted jewellery by Mel",
 };
 
 export default function RootLayout({ children }) {
@@ -16,10 +17,12 @@ export default function RootLayout({ children }) {
       <body className="bg-black text-white">
         <CartProvider>
 
-          <header className="sticky top-0 z-[9999] bg-black flex justify-between items-center px-6 py-4 border-b border-[#D4AF37]">
-            <h1 className="text-2xl font-serif">Beads & Pieces</h1>
+          <header className="sticky top-0 z-[9999] bg-black flex justify-between items-center px-4 sm:px-6 py-3 sm:py-4 border-b border-[#D4AF37]">
+            <Link href="/" className="text-xl sm:text-2xl font-serif">
+              Beads & Pieces
+            </Link>
 
-            <nav className="space-x-6 text-[#D4AF37] font-medium flex items-center">
+            <nav className="space-x-3 sm:space-x-6 text-[#D4AF37] font-medium flex items-center text-sm sm:text-base">
               <Link href="/">Home</Link>
               <Link href="/shop">Shop</Link>
               <CartLink />
@@ -71,7 +74,7 @@ export default function RootLayout({ children }) {
               </p>
 
               <p className="text-gray-500 text-xs">
-                © {new Date().getFullYear()} All Rights Reserved
+                &copy; {new Date().getFullYear()} All Rights Reserved
               </p>
 
             </div>
