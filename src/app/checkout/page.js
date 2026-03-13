@@ -3,8 +3,88 @@
 import { useCart } from "../../context/CartContext";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { calculateShipping } from "@/lib/shipping";
+
+const PAYPAL_CLIENT_ID = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID;
+
+function PayPalButtonsWrapper({ cart, clearCart, router }) {
+  const [{ isPending, isRejected }] = usePayPalScriptReducer();
+
+  if (isRejected) {
+    return (
+      <p className="text-red-400 text-sm text-center py-3">
+        PayPal failed to load. Please try paying with card instead.
+      </p>
+    );
+  }
+
+  if (isPending) {
+    return (
+      <div className="flex justify-center py-4">
+        <div className="w-6 h-6 border-2 border-[#D4AF37] border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  return (
+    <PayPalButtons
+      style={{
+        layout: "vertical",
+        color: "gold",
+        shape: "rect",
+        label: "paypal",
+        height: 48,
+      }}
+      createOrder={async () => {
+        const res = await fetch("/api/checkout/paypal/create", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ cart }),
+        });
+
+        const data = await res.json();
+
+        if (data.error) {
+          alert("PayPal error: " + data.error);
+          throw new Error(data.error);
+        }
+
+        return data.id;
+      }}
+      onApprove={async (data) => {
+        const cartData = cart.map(({ id, name, price, quantity }) => ({
+          id,
+          name,
+          price,
+          quantity,
+        }));
+
+        const res = await fetch("/api/checkout/paypal/capture", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            orderID: data.orderID,
+            cart: cartData,
+          }),
+        });
+
+        const result = await res.json();
+
+        if (result.status === "COMPLETED") {
+          clearCart();
+          router.push("/success");
+        } else {
+          alert("Payment was not completed. Please try again.");
+        }
+      }}
+      onError={(err) => {
+        console.error("PayPal error:", err);
+        alert("PayPal payment failed. Please try again.");
+      }}
+    />
+  );
+}
 
 export default function CheckoutPage() {
   const { cart, subtotal, clearCart } = useCart();
@@ -94,78 +174,32 @@ export default function CheckoutPage() {
             {loading ? "Redirecting..." : "Pay with Card"}
           </button>
 
-          {/* Divider */}
-          <div className="flex items-center gap-4">
-            <div className="flex-1 h-px bg-gray-700" />
-            <span className="text-gray-500 text-sm">or</span>
-            <div className="flex-1 h-px bg-gray-700" />
-          </div>
+          {PAYPAL_CLIENT_ID && (
+            <>
+              {/* Divider */}
+              <div className="flex items-center gap-4">
+                <div className="flex-1 h-px bg-gray-700" />
+                <span className="text-gray-500 text-sm">or</span>
+                <div className="flex-1 h-px bg-gray-700" />
+              </div>
 
-          {/* PayPal */}
-          <div className="rounded-lg overflow-hidden">
-            <PayPalScriptProvider
-              options={{
-                clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
-                currency: "GBP",
-              }}
-            >
-            <PayPalButtons
-              style={{
-                layout: "vertical",
-                color: "gold",
-                shape: "rect",
-                label: "paypal",
-                height: 48,
-              }}
-              createOrder={async () => {
-                const res = await fetch("/api/checkout/paypal/create", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ cart }),
-                });
-
-                const data = await res.json();
-
-                if (data.error) {
-                  alert("PayPal error: " + data.error);
-                  throw new Error(data.error);
-                }
-
-                return data.id;
-              }}
-              onApprove={async (data) => {
-                const cartData = cart.map(({ id, name, price, quantity }) => ({
-                  id,
-                  name,
-                  price,
-                  quantity,
-                }));
-
-                const res = await fetch("/api/checkout/paypal/capture", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({
-                    orderID: data.orderID,
-                    cart: cartData,
-                  }),
-                });
-
-                const result = await res.json();
-
-                if (result.status === "COMPLETED") {
-                  clearCart();
-                  router.push("/success");
-                } else {
-                  alert("Payment was not completed. Please try again.");
-                }
-              }}
-              onError={(err) => {
-                console.error("PayPal error:", err);
-                alert("PayPal payment failed. Please try again.");
-              }}
-            />
-            </PayPalScriptProvider>
-          </div>
+              {/* PayPal */}
+              <div className="rounded-lg overflow-hidden">
+                <PayPalScriptProvider
+                  options={{
+                    clientId: PAYPAL_CLIENT_ID,
+                    currency: "GBP",
+                  }}
+                >
+                  <PayPalButtonsWrapper
+                    cart={cart}
+                    clearCart={clearCart}
+                    router={router}
+                  />
+                </PayPalScriptProvider>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </main>
