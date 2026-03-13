@@ -12,10 +12,16 @@ function PayPalButtonsWrapper({ cart, clearCart, router }) {
   const [{ isPending, isRejected }] = usePayPalScriptReducer();
 
   if (isRejected) {
+    console.error("PayPal SDK failed to load");
     return (
-      <p className="text-red-400 text-sm text-center py-3">
-        PayPal failed to load. Please try paying with card instead.
-      </p>
+      <div className="text-center py-3">
+        <p className="text-red-400 text-sm">
+          PayPal failed to load. Please try paying with card instead.
+        </p>
+        <p className="text-gray-500 text-xs mt-1">
+          Check browser console for details.
+        </p>
+      </div>
     );
   }
 
@@ -189,6 +195,7 @@ export default function CheckoutPage() {
                   options={{
                     clientId: PAYPAL_CLIENT_ID,
                     currency: "GBP",
+                    intent: "capture",
                   }}
                 >
                   <PayPalButtonsWrapper
