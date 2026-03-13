@@ -1,4 +1,4 @@
--- Run this in your Supabase SQL Editor (https://supabase.com/dashboard → SQL Editor)
+-- Run this in your Supabase SQL Editor (https://supabase.com/dashboard -> SQL Editor)
 
 -- Products table
 create table if not exists products (
@@ -17,7 +17,9 @@ create table if not exists products (
 create table if not exists orders (
   id uuid default gen_random_uuid() primary key,
   order_number bigint generated always as identity,
-  stripe_session_id text unique,
+  stripe_session_id text,
+  paypal_order_id text,
+  payment_method text default 'stripe' check (payment_method in ('stripe', 'paypal')),
   customer_email text,
   customer_name text,
   shipping_address jsonb,
@@ -43,6 +45,10 @@ create policy "Service role full access on orders"
   on orders for all
   using (true)
   with check (true);
+
+-- If you already created the orders table without the PayPal columns, run these:
+-- alter table orders add column if not exists paypal_order_id text;
+-- alter table orders add column if not exists payment_method text default 'stripe';
 
 -- Optional: seed with your starter products
 -- Uncomment and edit these if you want to populate from SQL:

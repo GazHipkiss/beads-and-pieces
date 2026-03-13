@@ -94,11 +94,17 @@ export default async function OrderDetailPage({ params }) {
           </p>
         </div>
 
-        {order.stripe_session_id && (
-          <p className="text-xs text-gray-400 pt-2">
-            Stripe session: {order.stripe_session_id}
+        <div className="text-xs text-gray-400 pt-2 space-y-1">
+          <p>
+            Payment: <span className="capitalize font-medium text-gray-600">{order.payment_method || "stripe"}</span>
           </p>
-        )}
+          {order.stripe_session_id && (
+            <p>Stripe session: {order.stripe_session_id}</p>
+          )}
+          {order.paypal_order_id && (
+            <p>PayPal order: {order.paypal_order_id}</p>
+          )}
+        </div>
       </div>
     </div>
   );
