@@ -6,19 +6,22 @@ Matches the original Next.js site: **black background**, **gold (#D4AF37)**, **C
 
 1. **Create a Shopify store** (free trial): [shopify.com](https://www.shopify.com) → start trial, choose store name.
 2. Zip this folder:
-   ```bash
+  ```bash
    cd shopify-theme
    zip -r ../beads-pieces-shopify-theme.zip .
-   ```
+  ```
 3. In Shopify admin: **Online Store → Themes → Add theme → Upload zip file** → upload `beads-pieces-shopify-theme.zip`.
 4. Click **Customize** on the new theme, then:
-   - **Home page**: open **Featured collection** section → choose the collection that holds Mel’s products (create collection first if needed).
    - **Theme settings** (paintbrush icon, left): set **Instagram URL** and designer credit if different.
-5. **Navigation**: **Online Store → Navigation** → edit **Main menu** (or create **Main menu** if missing). Add:
-   - Home → `/`
-   - Shop → `/collections/all` (or a specific collection URL)
-6. **Header section**: In theme editor, select **Header** → assign **Main menu** to the menu you created.
-7. **Publish** the theme when happy.
+   - **Home page** is only the hero + About Me — **no product grid on home** (by design).
+5. **Where products show (“catalog”)**: In Shopify, the catalog is a **collection page**, not the home page. Add a menu link:
+   - **Online Store → Navigation** → edit **Main menu**.
+   - **Home** → `/`
+   - **Shop** or **Products** → link to **Collections** → choose **All** (or create a collection that contains every product and link to that).
+   - That URL is your catalog (same black/gold grid as before, but only when people click Shop/Products).
+6. **Products**: **Admin → Products → Add product**. Each product must be in at least one collection (often “All” or an automated “all products” collection) or it won’t appear on the catalog link.
+7. **Header section**: In theme editor, select **Header** → assign **Main menu** to the menu you created.
+8. **Publish** the theme when happy.
 
 ## Mel’s day-to-day
 
@@ -38,20 +41,22 @@ Links the folder to the store for live preview and push.
 
 ## Files overview
 
-| Path | Purpose |
-|------|---------|
-| `layout/theme.liquid` | HTML shell, fonts, CSS |
-| `assets/base.css` | All styling |
-| `sections/header.liquid` | Sticky header + nav + cart |
-| `sections/footer.liquid` | Made by Mel, Instagram, credit |
-| `sections/hero-home.liquid` | Gold border hero |
-| `sections/about-me.liquid` | About block |
-| `sections/featured-collection.liquid` | Product grid on home |
-| `sections/main-collection.liquid` | Collection page |
-| `sections/main-product.liquid` | Product detail + add to cart |
-| `sections/main-cart.liquid` | Cart |
-| `sections/main-page.liquid` | Static pages (policies) |
-| `templates/*.json` | Which sections appear on each template |
+
+| Path                                  | Purpose                                |
+| ------------------------------------- | -------------------------------------- |
+| `layout/theme.liquid`                 | HTML shell, fonts, CSS                 |
+| `assets/base.css`                     | All styling                            |
+| `sections/header.liquid`              | Sticky header + nav + cart             |
+| `sections/footer.liquid`              | Made by Mel, Instagram, credit         |
+| `sections/hero-home.liquid`           | Gold border hero                       |
+| `sections/about-me.liquid`            | About block                            |
+| `sections/featured-collection.liquid` | Optional product grid (not on home by default) |
+| `sections/main-collection.liquid`     | Collection page                        |
+| `sections/main-product.liquid`        | Product detail + add to cart           |
+| `sections/main-cart.liquid`           | Cart                                   |
+| `sections/main-page.liquid`           | Static pages (policies)                |
+| `templates/*.json`                    | Which sections appear on each template |
+
 
 ## Relationship to the Next.js app
 
@@ -59,3 +64,4 @@ This theme lives **beside** your existing `beads-and-pieces-mel` site. You can:
 
 - Run **only Shopify** for Mel (simplest), or  
 - Keep the Next.js site as a **landing page** that links to `https://her-store.myshopify.com` or a custom domain pointed at Shopify.
+
