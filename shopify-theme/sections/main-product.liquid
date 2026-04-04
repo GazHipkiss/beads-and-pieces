@@ -1,0 +1,79 @@
+<div class="bnp-product">
+  <div class="bnp-product__inner">
+    <div class="bnp-product__media">
+      {% if product.featured_image %}
+        <img
+          src="{{ product.featured_image | image_url: width: 1200 }}"
+          alt="{{ product.featured_image.alt | escape }}"
+          width="{{ product.featured_image.width }}"
+          height="{{ product.featured_image.height }}"
+          loading="eager"
+        >
+      {% endif %}
+    </div>
+
+    <h1 class="bnp-product__title">{{ product.title }}</h1>
+
+    {% if product.description != blank %}
+      <div class="bnp-product__desc rte">{{ product.description }}</div>
+    {% else %}
+      <p class="bnp-product__desc">A beautifully handcrafted piece designed with care and attention to detail.</p>
+    {% endif %}
+
+    {% assign current_variant = product.selected_or_first_available_variant %}
+    <p class="bnp-product__price" data-variant-price>{{ current_variant.price | money }}</p>
+
+    {% form 'product', product %}
+      {% if product.has_only_default_variant %}
+        <input type="hidden" name="id" value="{{ current_variant.id }}">
+      {% else %}
+        <label style="display:block;color:#9ca3af;font-size:0.875rem;margin-bottom:0.5rem;">Options</label>
+        <select
+          name="id"
+          style="width:100%;padding:0.75rem;background:#000;border:1px solid var(--bnp-gold);color:var(--bnp-gold);border-radius:0.25rem;margin-bottom:1.5rem;"
+          data-variant-select
+        >
+          {% for variant in product.variants %}
+            <option
+              value="{{ variant.id }}"
+              {% if variant == current_variant %}selected{% endif %}
+              {% unless variant.available %}disabled{% endunless %}
+              data-price="{{ variant.price | money }}"
+            >
+              {{ variant.title }} — {{ variant.price | money }}{% unless variant.available %} (Sold out){% endunless %}
+            </option>
+          {% endfor %}
+        </select>
+      {% endif %}
+
+      <button type="submit" name="add" class="bnp-btn bnp-btn--gold" {% unless current_variant.available %}disabled{% endunless %}>
+        {% if current_variant.available %}
+          {{ 'products.product.add_to_cart' | t }}
+        {% else %}
+          {{ 'products.product.sold_out' | t }}
+        {% endif %}
+      </button>
+    {% endform %}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var sel = document.querySelector('[data-variant-select]');
+    var priceEl = document.querySelector('[data-variant-price]');
+    if (sel && priceEl) {
+      sel.addEventListener('change', function () {
+        var opt = sel.options[sel.selectedIndex];
+        if (opt && opt.dataset.price) priceEl.textContent = opt.dataset.price;
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,66 @@
+{% if section.settings.collection != blank %}
+  {% assign collection = collections[section.settings.collection] %}
+{% endif %}
+
+{% if collection != blank and collection.products_count > 0 %}
+  <h2 class="bnp-section-title" style="color: var(--bnp-gold); border-bottom: 1px solid rgba(212,175,55,0.4);">{{ section.settings.title }}</h2>
+  <div class="bnp-grid">
+    {% for product in collection.products limit: section.settings.products_to_show %}
+      <a href="{{ product.url }}" class="bnp-card">
+        <div class="bnp-card__media">
+          {% if product.featured_image %}
+            <img
+              src="{{ product.featured_image | image_url: width: 600 }}"
+              alt="{{ product.featured_image.alt | escape }}"
+              width="600"
+              height="600"
+              loading="lazy"
+            >
+          {% else %}
+            <span style="color:#6b7280;">No image</span>
+          {% endif %}
+        </div>
+        <h3 class="bnp-card__title">{{ product.title }}</h3>
+        <p class="bnp-card__price">{{ product.price | money }}</p>
+      </a>
+    {% endfor %}
+  </div>
+{% elsif section.settings.collection == blank %}
+  <p style="text-align:center;color:#9ca3af;padding:2rem;">Select a collection in the theme editor.</p>
+{% else %}
+  <p style="text-align:center;color:#9ca3af;padding:2rem;">Add products to this collection in Shopify Admin.</p>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "My Collection"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 24,
+      "step": 1,
+      "default": 12,
+      "label": "Products to show"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection"
+    }
+  ]
+}
+{% endschema %}

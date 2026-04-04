@@ -1,0 +1,35 @@
+<div class="bnp-hero-wrap">
+  <div class="bnp-hero-box">
+    <h1>{{ section.settings.heading | default: shop.name }}</h1>
+    <p>{{ section.settings.subheading }}</p>
+    <div class="bnp-shimmer" aria-hidden="true"></div>
+  </div>
+</div>
+<div class="bnp-divider-line"><span></span></div>
+
+{% schema %}
+{
+  "name": "Home hero",
+  "tag": "section",
+  "class": "section-hero-home",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Beads & Pieces"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Explore handcrafted jewellery."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home hero"
+    }
+  ]
+}
+{% endschema %}

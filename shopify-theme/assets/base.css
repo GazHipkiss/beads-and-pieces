@@ -1,0 +1,512 @@
+/* Beads & Pieces — matches Next.js site: black + gold #D4AF37 */
+
+:root {
+  --bnp-gold: #D4AF37;
+  --bnp-black: #000000;
+  --bnp-gray-300: #d1d5db;
+  --bnp-gray-400: #9ca3af;
+  --bnp-gray-500: #6b7280;
+  --bnp-card-bg: linear-gradient(180deg, #000 0%, #0d0d0d 50%, #1a1a1a 100%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body.bnp-body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bnp-black);
+  color: #fff;
+  font-family: Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.bnp-skip {
+  position: absolute;
+  left: -9999px;
+  z-index: 99999;
+  padding: 0.5rem 1rem;
+  background: var(--bnp-gold);
+  color: #000;
+}
+.bnp-skip:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+/* Header */
+.bnp-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--bnp-black);
+  border-bottom: 1px solid var(--bnp-gold);
+}
+
+.bnp-header__brand {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+}
+
+.bnp-header__nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 3vw, 1.5rem);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+@media (min-width: 640px) {
+  .bnp-header__nav {
+    font-size: 1rem;
+  }
+}
+
+.bnp-header__nav a {
+  color: var(--bnp-gold);
+  text-decoration: none;
+}
+.bnp-header__nav a:hover {
+  color: #fff;
+}
+
+.bnp-header__cart {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.bnp-header__cart-count {
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 0.35rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #f7d774, var(--bnp-gold));
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Main */
+.bnp-main {
+  min-height: 60vh;
+}
+
+/* Footer */
+.bnp-footer {
+  margin-top: 4rem;
+  padding: 2.5rem 1.5rem;
+  border-top: 1px solid var(--bnp-gold);
+  text-align: center;
+}
+
+.bnp-footer__mel {
+  color: var(--bnp-gold);
+  font-style: italic;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--bnp-gold);
+  padding-bottom: 2px;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.bnp-footer__ig {
+  color: var(--bnp-gold);
+  margin-bottom: 1rem;
+  display: inline-flex;
+}
+.bnp-footer__ig:hover {
+  color: #fff;
+}
+
+.bnp-footer__credit {
+  font-size: 0.75rem;
+  color: var(--bnp-gray-400);
+  margin-top: 0.5rem;
+}
+.bnp-footer__credit a {
+  color: var(--bnp-gold);
+  text-decoration: none;
+}
+.bnp-footer__credit a:hover {
+  color: #fff;
+}
+
+.bnp-footer__copy {
+  font-size: 0.75rem;
+  color: var(--bnp-gray-500);
+  margin-top: 0.25rem;
+}
+
+/* Hero home */
+.bnp-hero-wrap {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+}
+
+.bnp-hero-box {
+  position: relative;
+  max-width: 42rem;
+  padding: clamp(1.5rem, 5vw, 3rem);
+  border: 2px solid var(--bnp-gold);
+  border-radius: 0.75rem;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+  overflow: hidden;
+  animation: bnpFadeInBox 1.2s ease-out forwards;
+}
+
+.bnp-hero-box h1 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2.25rem, 8vw, 3.75rem);
+  margin: 0 0 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--bnp-gold);
+  animation: bnpFadeInUp 1s ease-out 0.1s forwards;
+  opacity: 0;
+}
+
+.bnp-hero-box p {
+  font-size: clamp(1.125rem, 3vw, 1.25rem);
+  color: var(--bnp-gray-300);
+  margin: 0;
+  animation: bnpFadeInUp 1s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+.bnp-shimmer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.35) 50%,
+    transparent 100%
+  );
+  animation: bnpShimmer 5s linear infinite;
+  mix-blend-mode: screen;
+}
+
+.bnp-divider-line {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+.bnp-divider-line span {
+  width: 8rem;
+  height: 2px;
+  background: var(--bnp-gold);
+}
+
+/* About */
+.bnp-about {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 0 1rem 2.5rem;
+  text-align: center;
+  animation: bnpFadeInUp 1s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.bnp-about h2 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.875rem;
+  color: var(--bnp-gold);
+  margin: 0 0 0.5rem;
+}
+
+.bnp-about__text {
+  color: var(--bnp-gray-300);
+  font-size: 1.125rem;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* Featured / collection heading */
+.bnp-section-title {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 2.25rem;
+  text-align: center;
+  margin: 3rem 0 2rem;
+  padding-bottom: 1rem;
+}
+
+/* Product grid */
+.bnp-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+@media (min-width: 640px) {
+  .bnp-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .bnp-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.bnp-card {
+  border: 1px solid var(--bnp-gold);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.3s ease;
+}
+.bnp-card:hover {
+  transform: scale(1.03);
+}
+
+.bnp-card__media {
+  aspect-ratio: 1;
+  background: #000;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bnp-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.bnp-card__title {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.25rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.bnp-card__price {
+  color: var(--bnp-gold);
+  font-weight: 600;
+}
+
+/* Product page */
+.bnp-product {
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.bnp-product__inner {
+  border-radius: 0.75rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  background: var(--bnp-card-bg);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.25);
+}
+
+.bnp-product__media {
+  width: 100%;
+  max-height: 20rem;
+  background: #000;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bnp-product__media img {
+  max-width: 100%;
+  max-height: 20rem;
+  object-fit: contain;
+}
+
+.bnp-product__title {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 2.25rem;
+  margin: 0 0 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+.bnp-product__desc {
+  color: var(--bnp-gray-300);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.bnp-product__price {
+  font-size: 1.875rem;
+  color: var(--bnp-gold);
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.bnp-btn {
+  display: inline-block;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+}
+
+.bnp-btn--gold {
+  background: var(--bnp-gold);
+  color: #000;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
+}
+.bnp-btn--gold:hover {
+  background: #fff;
+  color: #000;
+}
+
+.bnp-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Cart */
+.bnp-cart {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+.bnp-cart h1 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 2.25rem;
+  text-align: center;
+  border-bottom: 1px solid var(--bnp-gold);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.bnp-cart__row {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  border: 1px solid var(--bnp-gold);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.bnp-cart__thumb {
+  width: 5rem;
+  height: 5rem;
+  flex-shrink: 0;
+  background: #000;
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+.bnp-cart__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.bnp-cart__checkout {
+  margin-top: 1.5rem;
+}
+
+@keyframes bnpFadeInBox {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bnpFadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes bnpFadeInUpStart {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+.bnp-hero-box h1,
+.bnp-hero-box p,
+.bnp-about {
+  animation-name: bnpFadeInUp;
+  animation-fill-mode: forwards;
+}
+.bnp-hero-box h1 {
+  transform: translateY(20px);
+}
+.bnp-hero-box p {
+  transform: translateY(20px);
+}
+.bnp-about {
+  transform: translateY(20px);
+}
+
+@keyframes bnpShimmer {
+  from {
+    transform: translateX(-150%);
+  }
+  to {
+    transform: translateX(150%);
+  }
+}
+
+/* Rich text (policy pages, product description) */
+.bnp-body .rte a {
+  color: var(--bnp-gold);
+  text-decoration: underline;
+}
+.bnp-body .rte a:hover {
+  color: #fff;
+}
+.bnp-body .rte p {
+  margin: 0 0 1rem;
+}
+.bnp-body .rte ul,
+.bnp-body .rte ol {
+  padding-left: 1.25rem;
+  color: var(--bnp-gray-300);
+}
+

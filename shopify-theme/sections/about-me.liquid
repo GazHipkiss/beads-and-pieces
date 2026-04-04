@@ -1,0 +1,30 @@
+<section class="bnp-about">
+  <h2>{{ section.settings.heading }}</h2>
+  <div class="bnp-about__text rte">{{ section.settings.text }}</div>
+</section>
+
+{% schema %}
+{
+  "name": "About me",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "About Me"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Hi I'm Mel, I'm a passionate jewellery maker who creates each piece by hand with care, intention, and a love for detail. My work blends simplicity with elegance, offering meaningful pieces designed to be worn every day.</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About me"
+    }
+  ]
+}
+{% endschema %}

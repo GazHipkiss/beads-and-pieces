@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-home",
+      "settings": {
+        "heading": "Beads & Pieces",
+        "subheading": "Explore handcrafted jewellery."
+      }
+    },
+    "about": {
+      "type": "about-me",
+      "settings": {
+        "heading": "About Me",
+        "text": "<p>Hi I'm Mel, I'm a passionate jewellery maker who creates each piece by hand with care, intention, and a love for detail. My work blends simplicity with elegance, offering meaningful pieces designed to be worn every day.</p>"
+      }
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "My Collection",
+        "products_to_show": 12
+      }
+    }
+  },
+  "order": ["hero", "about", "featured"]
+}

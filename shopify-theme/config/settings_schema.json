@@ -1,0 +1,33 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Beads & Pieces",
+    "theme_version": "1.0.0",
+    "theme_author": "Hipkiss Digital",
+    "theme_documentation_url": "https://github.com/",
+    "theme_support_url": "https://github.com/"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "text",
+        "id": "instagram_url",
+        "label": "Instagram URL",
+        "default": "https://instagram.com/beads_n_pieces_25"
+      },
+      {
+        "type": "text",
+        "id": "designer_url",
+        "label": "Designer credit URL",
+        "default": "https://hipkissdigital.com"
+      },
+      {
+        "type": "text",
+        "id": "designer_label",
+        "label": "Designer credit text",
+        "default": "Hipkiss Digital"
+      }
+    ]
+  }
+]

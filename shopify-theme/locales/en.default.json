@@ -1,0 +1,24 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out"
+    }
+  },
+  "sections": {
+    "cart": {
+      "title": "Cart",
+      "checkout": "Checkout",
+      "empty": "Your cart is empty."
+    }
+  }
+}

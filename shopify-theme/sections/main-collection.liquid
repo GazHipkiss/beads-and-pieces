@@ -1,0 +1,50 @@
+<h1 class="bnp-section-title" style="color: var(--bnp-gold); border-bottom: 1px solid rgba(212,175,55,0.4);">{{ collection.title }}</h1>
+
+{% if collection.description != blank %}
+  <div class="bnp-about__text rte" style="max-width:48rem;margin:0 auto 2rem;padding:0 1.5rem;text-align:center;color:#d1d5db;">
+    {{ collection.description }}
+  </div>
+{% endif %}
+
+{% paginate collection.products by 24 %}
+  <div class="bnp-grid">
+    {% for product in collection.products %}
+      <a href="{{ product.url }}" class="bnp-card">
+        <div class="bnp-card__media">
+          {% if product.featured_image %}
+            <img
+              src="{{ product.featured_image | image_url: width: 600 }}"
+              alt="{{ product.featured_image.alt | escape }}"
+              width="600"
+              height="600"
+              loading="lazy"
+            >
+          {% else %}
+            <span style="color:#6b7280;">No image</span>
+          {% endif %}
+        </div>
+        <h3 class="bnp-card__title">{{ product.title }}</h3>
+        <p class="bnp-card__price">{{ product.price | money }}</p>
+      </a>
+    {% endfor %}
+  </div>
+
+  {% if paginate.pages > 1 %}
+    <nav style="display:flex;justify-content:center;gap:1rem;padding:2rem;color:var(--bnp-gold);">
+      {% if paginate.previous %}
+        <a href="{{ paginate.previous.url }}" style="color:var(--bnp-gold);">{{ paginate.previous.title }}</a>
+      {% endif %}
+      {% if paginate.next %}
+        <a href="{{ paginate.next.url }}" style="color:var(--bnp-gold);">{{ paginate.next.title }}</a>
+      {% endif %}
+    </nav>
+  {% endif %}
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Collection grid",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

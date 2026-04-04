@@ -1,0 +1,39 @@
+<header class="bnp-header">
+  <a href="{{ routes.root_url }}" class="bnp-header__brand">{{ shop.name }}</a>
+  <nav class="bnp-header__nav" aria-label="Main">
+    {% if section.settings.menu != blank %}
+      {% for link in linklists[section.settings.menu].links %}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {% endfor %}
+    {% else %}
+      <a href="{{ routes.root_url }}">Home</a>
+      <a href="{{ routes.all_products_collection_url }}">Shop</a>
+    {% endif %}
+    <a href="{{ routes.cart_url }}" class="bnp-header__cart" aria-label="Cart">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M3 3h2l.4 2M7 13h10l4-8H5.4"/>
+        <circle cx="9" cy="19" r="2"/>
+        <circle cx="17" cy="19" r="2"/>
+      </svg>
+      Cart
+      {% if cart.item_count > 0 %}
+        <span class="bnp-header__cart-count">{{ cart.item_count }}</span>
+      {% endif %}
+    </a>
+  </nav>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}
