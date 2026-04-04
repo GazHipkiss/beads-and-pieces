@@ -51,6 +51,7 @@ export async function POST(req) {
 
     const stripe = getStripe();
     const session = await stripe.checkout.sessions.create({
+      // Apple Pay / Google Pay show on Stripe Checkout for card when domain is verified in Dashboard
       payment_method_types: ["card"],
       mode: "payment",
       line_items,
