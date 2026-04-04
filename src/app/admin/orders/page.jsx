@@ -1,4 +1,5 @@
 import { getSupabaseAdmin } from "@/lib/supabase/server";
+import { formatSupabaseAdminError } from "@/lib/supabase/adminErrorMessage";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
@@ -30,7 +31,9 @@ export default async function AdminOrdersPage() {
       <h1 className="text-2xl font-semibold mb-8">Orders</h1>
 
       {error && (
-        <p className="text-red-500 mb-4">Error: {error.message}</p>
+        <p className="text-red-600 mb-4 text-sm leading-relaxed max-w-2xl">
+          {formatSupabaseAdminError(error)}
+        </p>
       )}
 
       {(!orders || orders.length === 0) && !error && (
